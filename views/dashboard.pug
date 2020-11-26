@@ -1,0 +1,27 @@
+extends layout.pug
+
+mixin displayProject(project)
+    .project
+        .project-name= project.title
+        .project-bugs= project.bugs.length + " bugs"
+        button
+            a(href=`/dashboard/${id}/projects/${project.id}/bugs`) View Bugs
+
+        if project.user == id
+            .delete
+                form(method="POST" action=`/dashboard/${id}/projects/${project.id}?_method=DELETE`)
+                    input(type="submit" value="Delete Project")
+
+block content
+    h1 All Projects
+
+    .projects-list
+        each project in projects
+            +displayProject(project)
+
+    h2 Add New Project
+
+    form(method="POST" action=`/dashboard/${id}/projects`)
+        label(for="title") Project Title:
+        input(name="title" id="title" type="text" required)
+        input(type="submit" value="Add Project")

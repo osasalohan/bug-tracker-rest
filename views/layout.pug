@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        link(rel="stylesheet" type="text/css" href="./styles.css")
+        title The Bug Tracker App
+    body
+        .navbar
+            h2 Bug Tracker
+            .auth
+                if !firstName
+                    a(href="/signin") Log In
+                    a(href="/signup") Register
+                else
+                    h3 Hello #{firstName}
+                    a(href="/logout") Log Out
+
+        if error
+            .error
+                h3 Error! #{error}
+
+        block content

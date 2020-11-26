@@ -1,0 +1,39 @@
+extends layout.pug
+
+mixin displayComments(comment)
+    .comment
+        p #{comment.text}
+        p by #{comment.user.firstName}
+
+        if comment.user.id == id
+            .delete
+                form(method="POST" action=`/dashboard/${id}/projects/${bug.project}/bugs/${bug.id}/comments/${comment.id}?_method=DELETE`)
+                    input(type="submit" value="Delete Comment")
+
+block content
+    h1 #{bug.title}
+
+    h2 Description
+    p #{bug.description}
+
+    h2 Status
+    p #{bug.status}
+
+    if userType === "admin"
+        form(method="POST" action=`/dashboard/${id}/projects/${bug.project}/bugs/${bug.id}?_method=PUT`)
+            select(name="status")
+                option(value="Pending" selected) Pending
+                option(value="Resolved") Resolved
+            input(type="submit" value="Change Status")
+
+    h2 Comments
+
+    .comments-list
+        each comment in bug.comments
+            +displayComments(comment)
+
+    h2 Add New Comment
+
+    form(method="POST" action=`/dashboard/${id}/projects/${bug.project}/bugs/${bug.id}/comments`)
+        input(name="text" type="text" required)
+        input(type="submit" value="Add Comment")

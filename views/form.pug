@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+    form(method="POST" action=`${register ? "/signup" : "signin"}`)
+        label(for="email") Email:
+        input(name="email" id="email" type="email" required)
+
+        label(for="password") Password:
+        input(name="password" id="password" type="password" required)
+
+        if register
+            label(for="firstName") First Name:
+            input(name="firstName" id="firstName" type="text" required)
+
+            label(for="lastName") Last Name:
+            input(name="lastName" id="lastName" type="text" required)
+
+        input(type="submit" value=`${register ? "Sign Up" : "Log In"}`)

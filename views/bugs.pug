@@ -1,0 +1,32 @@
+extends layout.pug
+
+mixin displayBug(bug)
+    .bug
+        .bug-name= bug.title
+        .bug-status= "Status: " + bug.status
+        button
+            a(href=`/dashboard/${id}/projects/${project.id}/bugs/${bug.id}`) View Details
+
+        if bug.user == id
+            .delete
+                form(method="POST" action=`/dashboard/${id}/projects/${project.id}/bugs/${bug.id}?_method=DELETE`)
+                    input(type="submit" value="Delete Bug")
+
+block content
+    h1 All Bugs for #{project.title}
+
+    .bugs-list
+        each bug in project.bugs
+            +displayBug(bug)
+
+    h2 Add New Bug
+
+    form(method="POST" action=`/dashboard/${id}/projects/${project.id}/bugs`)
+        label(for="title") Title:
+        input(name="title" id="title" type="text" required)
+
+        label(for="description") Description:
+        textarea(name="description" id="description" required)
+
+        input(type="submit" value="Add Bug")
+
