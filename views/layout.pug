@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="utf-8")
         meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
-        link(rel="stylesheet" type="text/css" href="./styles.css")
+        include assets/stylesheet.pug
         title The Bug Tracker App
     body
         .navbar
@@ -20,4 +20,10 @@ html(lang="en")
             .error
                 h3 Error! #{error}
 
+        if token
+            input(type="hidden" value=`${token}`)
+
         block content
+
+        block script
+            include assets/script.pug

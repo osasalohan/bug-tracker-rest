@@ -9,8 +9,10 @@ const {
 
 // router.use(loginRequired, ensureCorrectUser);
 
+//add comment route
 router.post("/comments", addComment);
 
+//delete comment route
 router.delete("/comments/:comment_id", deleteComment);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const db = require("../models");
 
+//populate bugs array of a project and passes the project variable to bugs page
 exports.getBugs = async (req, res, next) => {
   try {
     let user = await db.User.findById(req.params.id);
@@ -17,6 +18,7 @@ exports.getBugs = async (req, res, next) => {
   }
 };
 
+//creates new bug and adds to a project and user instance
 exports.addBug = async (req, res, next) => {
   try {
     let bug = await db.Bug.create({
@@ -36,6 +38,7 @@ exports.addBug = async (req, res, next) => {
   }
 };
 
+//gets particular bug, populates comments instance and passes bug variable to bug page
 exports.getBug = async (req, res, next) => {
   try {
     let user = await db.User.findById(req.params.id);
@@ -56,6 +59,7 @@ exports.getBug = async (req, res, next) => {
   }
 };
 
+//updates a bug and refreshes page
 exports.updateBug = async (req, res, next) => {
   try {
     await db.Bug.findByIdAndUpdate(req.params.bug_id, req.body);
@@ -65,6 +69,7 @@ exports.updateBug = async (req, res, next) => {
   }
 };
 
+//deletes a bug and refreshes page
 exports.deleteBug = async (req, res, next) => {
   try {
     await db.Bug.findByIdAndRemove(req.params.bug_id);

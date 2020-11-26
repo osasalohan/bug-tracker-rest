@@ -1,5 +1,6 @@
 const db = require("../models");
 
+//creates comment and adds it to a bug and user instance
 exports.addComment = async (req, res, next) => {
   try {
     let comment = await db.Comment.create({
@@ -19,6 +20,7 @@ exports.addComment = async (req, res, next) => {
   }
 };
 
+//deletes comment and refreshes page
 exports.deleteComment = async (req, res, next) => {
   try {
     await db.Comment.findByIdAndRemove(req.params.comment_id);

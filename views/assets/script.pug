@@ -1,0 +1,20 @@
+script(type="text/javascript").
+    const token = document.querySelector("input[type='hidden']").value;
+    const forms = document.querySelectorAll("form");
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        let formData = new FormData(e.target);
+        fetch(e.target.action, {
+            method: e.target.method,
+            headers: {
+                "Authorization": "bearer " + token,
+                "Content-Type": "application/json"
+            }
+            body: formData,
+        });
+    }
+
+    forms.forEach(form => {
+        form.addEventListener("submit", onSubmit)
+    })

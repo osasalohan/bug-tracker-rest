@@ -17,6 +17,7 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
+//removes comment from user and bug instances before deleting
 commentSchema.pre("remove", async function (next) {
   try {
     let user = await User.findById(this.user);

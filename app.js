@@ -12,25 +12,27 @@ const errorHandler = require("./handlers/error");
 
 const app = express();
 
+//set view engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+//express middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 
+//available routes
 app.use("/", authRoutes);
 app.use("/dashboard/:id", projectRoutes);
 app.use("/dashboard/:id/projects/:project_id", bugRoutes);
 app.use("/dashboard/:id/projects/:project_id/bugs/:bug_id", commentRoutes);
 
+//handle errors with useful messages
 app.use((req, res, next) => {
   let err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
-
 app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {

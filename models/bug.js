@@ -31,13 +31,13 @@ const bugSchema = new mongoose.Schema({
   },
 });
 
+//removes bug from user and project instances before deleting
 bugSchema.pre("remove", async function (next) {
   try {
     let user = await User.findById(this.user);
     let project = await Project.findById(this.project);
     user.bugs.remove(this.id);
     project.bugs.remove(this.id);
-    console.log(project.bugs);
     await user.save();
     await project.save();
     next();

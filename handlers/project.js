@@ -1,5 +1,6 @@
 const db = require("../models");
 
+//get all projects and pass as variable to dashboard page to be rendered
 exports.getProjects = async (req, res, next) => {
   try {
     let user = await db.User.findById(req.params.id);
@@ -15,6 +16,7 @@ exports.getProjects = async (req, res, next) => {
   }
 };
 
+//create a new project and add to user instance
 exports.addProject = async (req, res, next) => {
   try {
     let project = await db.Project.create({
@@ -30,6 +32,7 @@ exports.addProject = async (req, res, next) => {
   }
 };
 
+//delete a project and refresh page
 exports.deleteProject = async (req, res, next) => {
   try {
     await db.Project.findByIdAndRemove(req.params.project_id);

@@ -18,6 +18,7 @@ const projectSchema = new mongoose.Schema({
   ],
 });
 
+//removes project from user instance before deleting
 projectSchema.pre("remove", async function (next) {
   try {
     let user = await User.findById(this.user);

@@ -9,8 +9,13 @@ const {
 
 // router.use(loginRequired, ensureCorrectUser);
 
+//get projects route
 router.get("/projects", getProjects);
+
+//add project route
 router.post("/projects", addProject);
+
+//delete project route
 router.delete("/projects/:project_id", deleteProject);
 
 module.exports = router;

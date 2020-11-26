@@ -8,6 +8,7 @@ mongoose
     useUnifiedTopology: true,
     keepAlive: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   })
   .catch((err) => console.log(err));
 
